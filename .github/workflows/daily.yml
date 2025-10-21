@@ -1,0 +1,30 @@
+name: daily
+on:
+  schedule:
+    - cron: "0 7 * * *"   # 08:00 Europe/Sarajevo = 07:00 UTC
+  workflow_dispatch: {}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps
+        run: |
+          python -m pip install -U pip
+          pip install -r requirements.txt
+      - name: Ingest
+        run: python 04-pipelines/python/etl/ingest_rss.py
+      - name: Classify
+        run: python 04-pipelines/python/classify/quick_classify.py
+      - name: Market Panorama
+        run: python 04-pipelines/python/synth/make_market_panorama.py
+      - name: Operator Daily
+        run: python 04-pipelines/python/synth/make_operator_daily.py
+      - name: Upload briefs
+        uses: actions/upload-artifact@v4
+        with:
+          name: briefs
+          path: 06-delivery/briefs

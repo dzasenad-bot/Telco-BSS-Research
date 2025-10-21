@@ -1,0 +1,13 @@
+# <Vendor> — Battlecard (BSS)
+**Core:** <modules/products>
+**Ideal Fit:** <operator type/size/use-cases>
+**Strengths:** 
+- …
+**Weaknesses / Gaps:**
+- …
+**How to Compete:**
+- …
+**Landmines (questions to ask):**
+- …
+**Recent Moves (≤90d):**
+- [date] - move — source

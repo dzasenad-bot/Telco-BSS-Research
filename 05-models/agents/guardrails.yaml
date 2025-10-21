@@ -1,0 +1,3 @@
+- rule: "Every claim must have at least one reputable source."
+- rule: "Show publish dates; mark >90d as stale."
+- rule: "No PII; respect source licensing; keep quotes <25 words."

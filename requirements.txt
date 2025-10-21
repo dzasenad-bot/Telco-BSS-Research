@@ -1,0 +1,6 @@
+@'
+requests
+feedparser
+python-dateutil
+jinja2
+'@ | Set-Content .\requirements.txt -Encoding utf8

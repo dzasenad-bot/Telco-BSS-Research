@@ -1,0 +1,10 @@
+modules:
+  - charging
+  - billing
+  - crm
+  - catalog
+  - order
+  - ra
+  - partner
+  - policy
+  - mediation

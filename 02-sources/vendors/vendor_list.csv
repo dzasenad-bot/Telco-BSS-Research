@@ -1,0 +1,11 @@
+vendor,modules,go_to_market
+Amdocs,"billing,crm,order,catalog,ra,partner","SaaS,on-prem,cloud-native"
+Netcracker,"crm,catalog,order,charging,partner","SaaS,cloud-native"
+Ericsson,"charging,policy","cloud-native"
+CSG,"billing,charging","SaaS,cloud-native"
+Oracle,"billing,crm,order","SaaS,on-prem"
+Comarch,"billing,crm,ra","SaaS,on-prem"
+Tecnotree,"bss_fullstack","SaaS"
+Cerillion,"billing,crm,charging","SaaS,on-prem"
+Optiva,"charging,policy","SaaS"
+MATRIXX,"charging","cloud-native"

@@ -1,0 +1,12 @@
+name: ""
+hq: ""
+focus_modules: ["charging","billing","crm","catalog","order","ra","partner","policy","mediation"]
+go_to_market: ["SaaS","on-prem","cloud-native"]
+key_products: []
+reference_operators: []
+hyperscaler_partners: []
+integrators: []
+pricing_model: ["subscription","per-subscriber","usage","hybrid"]
+strengths: []
+risks: []
+notes: ""

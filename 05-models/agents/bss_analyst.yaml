@@ -1,0 +1,3 @@
+objective: operator-centric BSS insights
+tools: [web.search, rag.query, entity_linker, date_checker]
+loop: plan -> gather -> synthesize -> verify (source+date) -> write -> reflect

@@ -1,0 +1,15 @@
+source,name,url,notes
+news,TM Forum Inform,https://inform.tmforum.org/feed/,BSS/OSS/CX analysis
+news,Light Reading OSS/BSS,https://www.lightreading.com/rss_simple.asp?subsection=ossbss,Industry news
+vendor,Netcracker News,https://www.netcracker.com/news/rss,Vendor newsroom
+vendor,Ericsson News,https://www.ericsson.com/en/news/rss,Charging/CCS updates
+operator,Deutsche Telekom News,https://www.telekom.com/media/rss,Operator press
+operator,Orange News,https://www.orange.com/en/rss,Operator press
+operator,e-and Press,https://eand.com/en/media-centre.rss,Operator press
+news,Telecoms.com,https://telecoms.com/feed/,General telecom news
+news,RCR Wireless,https://www.rcrwireless.com/feed,Industry news
+news,Fierce Telecom,https://www.fiercetelecom.com/rss/xml,Telco/BSS/OSS
+vendor,Cerillion News,https://www.cerillion.com/Resources/Blog-RSS.aspx,Vendor blog
+vendor,Comarch Telco,https://www.comarch.com/telecommunications/rss/,Vendor news
+news,Fierce Wireless,https://www.fiercewireless.com/rss/xml,Wireless
+news,TelecomTV,https://www.telecomtv.com/rss/news/,Analysis/News

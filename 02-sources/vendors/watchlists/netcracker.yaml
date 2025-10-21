@@ -1,0 +1,8 @@
+name: Netcracker
+priority_modules: ["crm","catalog","order","charging","partner"]
+signals: [operator_win, partnership, benchmark_award, product_release]
+sources:
+  - https://www.netcracker.com/news/
+  - https://inform.tmforum.org/
+  - https://www.lightreading.com/
+notes: "Capture Digital BSS platform narratives and operator milestones."

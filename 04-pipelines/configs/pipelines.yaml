@@ -1,0 +1,8 @@
+timezone: Europe/Sarajevo
+thresholds:
+  recency_days: 90
+  daily_brief_items: 5
+  confidence_min: 0.4
+schedules:
+  ingest_cron: "*/30 * * * *"
+  brief_daily: "0 8 * * *"

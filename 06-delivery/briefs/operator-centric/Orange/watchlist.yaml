@@ -1,0 +1,4 @@
+vendor_focus: ["Netcracker","Amdocs","Ericsson","CSG","Oracle","Comarch","Tecnotree","Cerillion","Optiva","MATRIXX"]
+modules_of_interest: ["charging","billing","crm","catalog","order","ra","partner"]
+signals: ["operator_win","modernization","saaS_migration","ai_in_bss"]
+kpi_notes: "Track monetization (5G SA, B2B/B2B2X), time-to-market, ARPU trends."

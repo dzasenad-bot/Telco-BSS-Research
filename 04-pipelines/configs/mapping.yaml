@@ -1,0 +1,10 @@
+acf_map:
+  headline: field_headline
+  summary: field_summary
+  why_it_matters: field_why
+  impact_sales: field_impact_sales
+  impact_product: field_impact_product
+  impact_compliance: field_impact_compliance
+  bss_module: field_bss_module
+  entities: field_entities
+  sources: field_sources

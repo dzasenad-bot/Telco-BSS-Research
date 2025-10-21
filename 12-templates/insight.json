@@ -1,0 +1,13 @@
+{
+  "insight_id": "uuid",
+  "type": "operator_deployment|vendor_move|trend|standard",
+  "bss_module": "charging|billing|crm|catalog|order|ra|partner|policy|mediation",
+  "headline": "",
+  "summary": "",
+  "why_it_matters": "",
+  "impact": {"sales": "low|med|high", "product": "low|med|high", "compliance": "low|med|high"},
+  "entities": {"operator": [], "vendor": [], "geo": [], "tech": []},
+  "confidence": 0.0,
+  "time_horizon": "now|3m|12m",
+  "sources": [{"title": "", "url": "", "published_at": "YYYY-MM-DD"}]
+}

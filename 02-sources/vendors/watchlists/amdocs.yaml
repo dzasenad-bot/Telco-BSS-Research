@@ -1,0 +1,8 @@
+name: Amdocs
+priority_modules: ["billing","crm","order","catalog","ra"]
+signals: [operator_win, product_release, partnership, roadmap_signal]
+sources:
+  - https://www.amdocs.com/media-room/press-releases
+  - https://www.lightreading.com/
+  - https://inform.tmforum.org/
+notes: "Billing/monetization modernization, SaaS pivot."

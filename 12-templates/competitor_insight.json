@@ -1,0 +1,14 @@
+{
+  "insight_id": "uuid",
+  "vendor": "",
+  "move_type": "product_release|operator_win|partnership|m_and_a|pricing_change|benchmark_award|compliance_update|roadmap_signal",
+  "bss_module": "charging|billing|crm|catalog|order|ra|partner|policy|mediation",
+  "headline": "",
+  "summary": "",
+  "why_it_matters": "",
+  "impact": {"sales": "low|med|high", "product": "low|med|high", "compliance": "low|med|high"},
+  "entities": {"operator": [], "geo": [], "tech": []},
+  "confidence": 0.0,
+  "sources": [{"title": "", "url": "", "published_at": "YYYY-MM-DD"}],
+  "links_to_operator_briefs": []
+}

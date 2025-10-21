@@ -1,0 +1,21 @@
+﻿# Daily Brief
+- **[Calix, Google want to make agentic AI easy for broadband](https://www.fierce-network.com/broadband/calix-google-want-make-agentic-ai-easy-broadband)** — _Fierce Telecom_ (2025-10-20)
+  - Why it matters: Širi BSS/industrijski signal.
+  - Impact: Sales=low, Product=low, GRC=low
+  - Sources: https://www.fierce-network.com/broadband/calix-google-want-make-agentic-ai-easy-broadband
+- **[GSMA Webinar: The Programmable Network: API-Driven Value for the Entire Ecosystem](https://content.rcrwireless.com/webinar-the-programmable-network)** — _RCR Wireless_ (2025-10-20)
+  - Why it matters: Širi BSS/industrijski signal.
+  - Impact: Sales=low, Product=low, GRC=low
+  - Sources: https://content.rcrwireless.com/webinar-the-programmable-network
+- **[Do trade and construction workers have a bright future in the era of AI?](https://www.fierce-network.com/broadband/do-trade-and-construction-workers-have-bright-future-era-ai)** — _Fierce Telecom_ (2025-10-20)
+  - Why it matters: Širi BSS/industrijski signal.
+  - Impact: Sales=low, Product=low, GRC=low
+  - Sources: https://www.fierce-network.com/broadband/do-trade-and-construction-workers-have-bright-future-era-ai
+- **[Satellite borrows a page from SD-WAN for multi-orbit connectivity](https://www.fierce-network.com/wireless/satellite-borrows-page-sd-wan-multi-orbit-connectivity)** — _Fierce Telecom_ (2025-10-20)
+  - Why it matters: Širi BSS/industrijski signal.
+  - Impact: Sales=low, Product=low, GRC=low
+  - Sources: https://www.fierce-network.com/wireless/satellite-borrows-page-sd-wan-multi-orbit-connectivity
+- **[T-Mobile launches 5G-Advanced public-private breakout feature](https://www.fierce-network.com/wireless/t-mobile-offers-5g-advanced-public-private-breakout-feature)** — _Fierce Telecom_ (2025-10-20)
+  - Why it matters: Širi BSS/industrijski signal.
+  - Impact: Sales=low, Product=low, GRC=low
+  - Sources: https://www.fierce-network.com/wireless/t-mobile-offers-5g-advanced-public-private-breakout-feature
