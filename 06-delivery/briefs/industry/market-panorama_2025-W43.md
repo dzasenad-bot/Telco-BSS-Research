@@ -4,11 +4,11 @@
 
 ## 1) Top trendovi
 
-- **general** — 24
+- **general** — 26
 
-- **ai_bss** — 11
+- **ai_bss** — 8
 
-- **catalog** — 1
+- **catalog** — 2
 
 
 ## 2) Najspominjaniji vendori
@@ -19,25 +19,25 @@
 
 ## 4) Top 10 naslova (sa “why it matters”)
 
-- **[Reliance Jio claims 234 million 5G subs, 50% 5G traffic](https://www.rcrwireless.com/20251020/5g/reliance-jio-5g-3)** — _RCR Wireless_ (2025-10-20)  
+- **[How Wi-Fi 8 tackles the growing device explosion](https://www.rcrwireless.com/20251021/devices/wi-fi-8-device-explosion)** — _RCR Wireless_ (2025-10-21)  
+  Why it matters: AI u BSS – automatizacija/personalizacija.
+
+- **[China Mobile’s revenues slightly up y-o-y in Jan-Sep](https://www.rcrwireless.com/20251021/5g/china-mobile-2)** — _RCR Wireless_ (2025-10-21)  
   Why it matters: Širi BSS/industrijski signal.
 
-- **[Turkcell tops the bill as Turkish 5G auction raises nearly $3 billion](https://www.rcrwireless.com/20251020/5g/turkish-5g-auction)** — _RCR Wireless_ (2025-10-20)  
+- **[‘Biggest in the US’ – equity recap fuels Future Tech’s private 5G ambitions](https://www.rcrwireless.com/20251021/internet-of-things/future-tech-private-5g-recap)** — _RCR Wireless_ (2025-10-21)  
+  Why it matters: AI u BSS – automatizacija/personalizacija.
+
+- **[NTT Data keeps on (semi-autonomously) truckin'](https://www.fierce-network.com/wireless/ntt-data-keeps-semi-autonomous-truckin)** — _Fierce Wireless_ (2025-10-21)  
   Why it matters: Širi BSS/industrijski signal.
 
-- **[Powering the future: New research gives significant insight to make 5G and NextG networks more energy efficient (Reader Forum)](https://www.rcrwireless.com/20251020/5g/powering-the-future-5g-and-nextg-networks)** — _RCR Wireless_ (2025-10-20)  
+- **[Ciena’s optic tech will power new Caribbean subsea cable](https://www.fierce-network.com/broadband/cienas-optic-tech-will-power-new-caribbean-subsea-cable)** — _Fierce Wireless_ (2025-10-21)  
+  Why it matters: Širi BSS/industrijski signal.
+
+- **[Opinion: Verizon needs new CEO Dan Schulman to pull it out of the doldrums](https://www.fierce-network.com/wireless/opinion-verizon-needs-new-ceo-dan-schulman-pull-it-out-doldrums)** — _Fierce Wireless_ (2025-10-21)  
   Why it matters: Širi BSS/industrijski signal.
 
 - **[GSMA Webinar: The Programmable Network: API-Driven Value for the Entire Ecosystem](https://content.rcrwireless.com/webinar-the-programmable-network)** — _RCR Wireless_ (2025-10-20)  
-  Why it matters: Širi BSS/industrijski signal.
-
-- **[Do trade and construction workers have a bright future in the era of AI?](https://www.fierce-network.com/broadband/do-trade-and-construction-workers-have-bright-future-era-ai)** — _Fierce Wireless_ (2025-10-20)  
-  Why it matters: AI u BSS – automatizacija/personalizacija.
-
-- **[Calix, Google want to make agentic AI easy for broadband](https://www.fierce-network.com/broadband/calix-google-want-make-agentic-ai-easy-broadband)** — _Fierce Wireless_ (2025-10-20)  
-  Why it matters: AI u BSS – automatizacija/personalizacija.
-
-- **[Satellite borrows a page from SD-WAN for multi-orbit connectivity](https://www.fierce-network.com/wireless/satellite-borrows-page-sd-wan-multi-orbit-connectivity)** — _Fierce Wireless_ (2025-10-20)  
   Why it matters: Širi BSS/industrijski signal.
 
 
