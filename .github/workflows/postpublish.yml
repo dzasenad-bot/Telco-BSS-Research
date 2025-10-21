@@ -12,7 +12,8 @@ jobs:
     env:
       TZ: Europe/Sarajevo
       N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
-      N8N_HMAC_SECRET: ${{ secrets.N8N_HMAC_SECRET }} # opcionalno; ako nije postavljen, slat će se bez potpisa
+      N8N_HMAC_SECRET: ${{ secrets.N8N_HMAC_SECRET }} # opcionalno
+
     steps:
       - name: Build payload
         run: |
@@ -37,28 +38,40 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Pripremi osnovne headere
+          # 0) Sanitizuj i validiraj URL iz secreta
+          URL_CLEAN="$(printf '%s' "${N8N_WEBHOOK_URL:-}" | tr -d '\r' | sed 's/^[ \t]*//;s/[ \t]*$//')"
+          if [ -z "$URL_CLEAN" ]; then
+            echo "❌ N8N_WEBHOOK_URL je prazan (secret nije postavljen ili pogrešno ime)."
+            exit 1
+          fi
+          if ! echo "$URL_CLEAN" | grep -Eiq '^https?://'; then
+            echo "❌ N8N_WEBHOOK_URL nije valjan http/https URL: $URL_CLEAN"
+            exit 1
+          fi
+          echo "➡️  Using webhook: $(echo "$URL_CLEAN" | sed 's,^\(https\?://.\{5\}\).*,\1…(masked),')"
+
+          # 1) Pripremi headere
           HDRS=(-H "Content-Type: application/json"
                 -H "X-GH-Workflow: postpublish"
                 -H "X-GH-Repo: ${{ github.repository }}"
                 -H "X-GH-Run-URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}")
 
-          # Ako je definisan HMAC secret, izračunaj potpis i dodaj header
+          # 2) (Opcionalno) HMAC potpis
           if [ -n "${N8N_HMAC_SECRET:-}" ]; then
             SIG=$(openssl dgst -sha256 -hmac "$N8N_HMAC_SECRET" -binary payload.json | xxd -p -c 256)
             HDRS+=(-H "X-Signature: sha256=${SIG}")
-            echo "HMAC signature added."
+            echo "🔐 HMAC signature added."
           else
-            echo "N8N_HMAC_SECRET nije postavljen — šaljem bez potpisa."
+            echo "ℹ️  N8N_HMAC_SECRET nije postavljen — šaljem bez potpisa."
           fi
 
-          # Slanje uz retry i timeoute
+          # 3) Slanje sa retry/timeout
           curl -sS \
             --fail-with-body \
             --retry 3 \
             --retry-delay 2 \
             --max-time 20 \
             -A "github-actions-postpublish" \
-            -X POST "$N8N_WEBHOOK_URL" \
+            -X POST "$URL_CLEAN" \
             "${HDRS[@]}" \
             --data @payload.json
