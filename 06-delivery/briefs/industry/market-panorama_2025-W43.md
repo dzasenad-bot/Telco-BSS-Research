@@ -4,19 +4,11 @@
 
 ## 1) Top trendovi
 
-- **general** — 121
+- **general** — 24
 
-- **ai_bss** — 23
+- **ai_bss** — 11
 
-- **crm** — 4
-
-- **catalog** — 4
-
-- **billing** — 4
-
-- **saas_bss** — 4
-
-- **charging** — 1
+- **catalog** — 1
 
 
 ## 2) Najspominjaniji vendori
@@ -27,36 +19,27 @@
 
 ## 4) Top 10 naslova (sa “why it matters”)
 
-- **[Beyond the cable: How Blue Wireless is redefining Ethernet for a wireless world](https://capacityglobal.com/news/beyond-the-cable-how-blue-wireless-is-redefining-ethernet-for-a-wireless-world/)** — _Capacity Media_ (2025-10-21)  
+- **[Reliance Jio claims 234 million 5G subs, 50% 5G traffic](https://www.rcrwireless.com/20251020/5g/reliance-jio-5g-3)** — _RCR Wireless_ (2025-10-20)  
   Why it matters: Širi BSS/industrijski signal.
 
-- **[Beyond the cable: How Blue Wireless is redefining Ethernet for a wireless world](https://capacityglobal.com/news/beyond-the-cable-how-blue-wireless-is-redefining-ethernet-for-a-wireless-world-2/)** — _Capacity Media_ (2025-10-21)  
+- **[Turkcell tops the bill as Turkish 5G auction raises nearly $3 billion](https://www.rcrwireless.com/20251020/5g/turkish-5g-auction)** — _RCR Wireless_ (2025-10-20)  
   Why it matters: Širi BSS/industrijski signal.
 
-- **[Outage, outrage and no plan B, AWS failure shows Europe is flying without a safety net](https://capacityglobal.com/news/aws-outage-analysis/)** — _Capacity Media_ (2025-10-21)  
+- **[Powering the future: New research gives significant insight to make 5G and NextG networks more energy efficient (Reader Forum)](https://www.rcrwireless.com/20251020/5g/powering-the-future-5g-and-nextg-networks)** — _RCR Wireless_ (2025-10-20)  
   Why it matters: Širi BSS/industrijski signal.
 
-- **[Capacity Europe 2025: Industry giants call for NaaS adoption](https://capacityglobal.com/news/capacity-europe-2025-keynote/)** — _Capacity Media_ (2025-10-21)  
+- **[GSMA Webinar: The Programmable Network: API-Driven Value for the Entire Ecosystem](https://content.rcrwireless.com/webinar-the-programmable-network)** — _RCR Wireless_ (2025-10-20)  
   Why it matters: Širi BSS/industrijski signal.
 
-- **[Lancom expands NetIX GR to Chania, Crete](https://capacityglobal.com/news/lancom-expands-netix-gr-to-chania-crete/)** — _Capacity Media_ (2025-10-21)  
-  Why it matters: Širi BSS/industrijski signal.
-
-- **[EXCLUSIVE: Zayo Europe unveils 400G London- Frankfurt route](https://capacityglobal.com/news/exclusive-zayo-london-capacity-europe/)** — _Capacity Media_ (2025-10-21)  
-  Why it matters: Širi BSS/industrijski signal.
-
-- **[Kalaam and Riedel Networks strengthen commitment to motorsport connectivity in MENA](https://capacityglobal.com/news/kalaam-and-riedel-networks-strengthen-commitment-to-motorsport-connectivity-in-mena/)** — _Capacity Media_ (2025-10-21)  
-  Why it matters: Širi BSS/industrijski signal.
-
-- **[GSMA and Leading African Operators Propose Minimum Requirements for Affordable 4G Smartphones](https://www.gsma.com/newsroom/press-release/gsma-and-leading-african-operators-propose-minimum-requirements-for-affordable-4g-smartphones/)** — _GSMA News_ (2025-10-21)  
-  Why it matters: Širi BSS/industrijski signal.
-
-- **[GSMA, Africa’s Leading Mobile Operators and the AI Ecosystem Unite to Accelerate Development of Inclusive African AI](https://www.gsma.com/newsroom/press-release/gsma-africas-leading-mobile-operators-and-the-ai-ecosystem-unite-to-accelerate-development-of-inclusive-african-ai/)** — _GSMA News_ (2025-10-21)  
+- **[Do trade and construction workers have a bright future in the era of AI?](https://www.fierce-network.com/broadband/do-trade-and-construction-workers-have-bright-future-era-ai)** — _Fierce Wireless_ (2025-10-20)  
   Why it matters: AI u BSS – automatizacija/personalizacija.
 
-- **[GSMA, Africa’s leading mobile operators and the AI Ecosystem unite to accelerate development of inclusive African AI](https://www.mtn.com/gsma-africas-leading-mobile-operators-and-the-ai-ecosystem-unite-to-accelerate-development-of-inclusive-african-ai/)** — _MTN Group_ (2025-10-21)  
+- **[Calix, Google want to make agentic AI easy for broadband](https://www.fierce-network.com/broadband/calix-google-want-make-agentic-ai-easy-broadband)** — _Fierce Wireless_ (2025-10-20)  
   Why it matters: AI u BSS – automatizacija/personalizacija.
+
+- **[Satellite borrows a page from SD-WAN for multi-orbit connectivity](https://www.fierce-network.com/wireless/satellite-borrows-page-sd-wan-multi-orbit-connectivity)** — _Fierce Wireless_ (2025-10-20)  
+  Why it matters: Širi BSS/industrijski signal.
 
 
 ---
-*Generated from 155 unique items across 7 days.*
+*Generated from 35 unique items across 7 days.*
