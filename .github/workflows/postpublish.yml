@@ -34,6 +34,12 @@ jobs:
           echo "Payload built:"
           cat payload.json
 
+      - name: Debug N8N_WEBHOOK_URL
+        run: |
+          RAW="${N8N_WEBHOOK_URL:-}"
+          echo "Len(raw)=$(( ${#RAW} ))"
+          printf '%s' "$RAW" | hexdump -C | head || true
+
       - name: Call n8n (with optional HMAC)
         run: |
           set -euo pipefail
@@ -49,6 +55,9 @@ jobs:
             exit 1
           fi
           echo "➡️  Using webhook: $(echo "$URL_CLEAN" | sed 's,^\(https\?://.\{5\}\).*,\1…(masked),')"
+
+          # 0.5) Brzi HEAD ping (debug) – ne obara job ako faila
+          curl -I -sS "$URL_CLEAN" | head -n 5 || echo "ℹ️  HEAD ping nije uspio (možda Webhook traži POST)."
 
           # 1) Pripremi headere
           HDRS=(-H "Content-Type: application/json"
