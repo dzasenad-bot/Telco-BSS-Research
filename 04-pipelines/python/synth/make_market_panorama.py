@@ -1,4 +1,5 @@
-import json, pathlib, datetime, collections, html, re
+import json, pathlib, datetime, collections, html, re, os
+from urllib.parse import urlparse
 from jinja2 import Template
 
 ROOT = pathlib.Path(__file__).resolve().parents[3]
@@ -50,6 +51,46 @@ def mk_why(tags):
     if "ai_bss" in t: return "AI u BSS – automatizacija i personalizacija."
     return "Širi BSS/industrijski signal."
 
+# ---------- Anti-dominance (ISKLJUČENO po difoltu) ----------
+# Uključi testno postavljanjem varijabli okruženja prije pokretanja:
+#   PowerShell (samo u tekućoj sesiji):
+#     $env:PANORAMA_ANTI_DOM="1"
+#     $env:PANORAMA_MAX_PER_DOMAIN="3"      # max linkova po domenu (default 3)
+#     $env:PANORAMA_MIN_SCORE="2"           # minimalni relevance_score za Top sekciju (default 0)
+#
+# Isključi:
+#     Remove-Item Env:PANORAMA_ANTI_DOM
+# ------------------------------------------------------------
+ANTI_DOM = os.getenv("PANORAMA_ANTI_DOM", "0") == "1"
+MAX_PER_DOMAIN = int(os.getenv("PANORAMA_MAX_PER_DOMAIN", "3"))
+MIN_SCORE = int(os.getenv("PANORAMA_MIN_SCORE", "0"))
+
+def domain_of(link: str) -> str:
+    try:
+        netloc = urlparse(link).netloc.lower()
+        # ukloni www.
+        return netloc[4:] if netloc.startswith("www.") else netloc
+    except Exception:
+        return ""
+
+def apply_anti_dominance(items):
+    """Zadrži najviše N stavki po domenu, preferiraj veći relevance_score i novije."""
+    if not ANTI_DOM:
+        return items
+    by_dom = collections.defaultdict(list)
+    for it in items:
+        by_dom[domain_of(it.get("link",""))].append(it)
+    limited = []
+    for dom, lst in by_dom.items():
+        lst_sorted = sorted(lst, key=lambda x: (x.get("relevance_score",0), x.get("published_date") or ""), reverse=True)
+        limited.extend(lst_sorted[:MAX_PER_DOMAIN])
+    # ponovo sortiraj cijelu listu
+    limited = sorted(limited, key=lambda x: (x.get("relevance_score",0), x.get("published_date") or ""), reverse=True)
+    print(f"[PANORAMA] anti-dominance ON | max_per_domain={MAX_PER_DOMAIN} | min_score={MIN_SCORE} | kept={len(limited)} of {len(items)}")
+    return limited
+
+# ------------------------------------------------------------
+
 items = []
 with open(INTERIM, encoding="utf-8") as fh:
     for line in fh:
@@ -70,8 +111,18 @@ for it in items:
     for o in it.get("entities",{}).get("operators",[]):
         cnt_o[o.lower()] += 1
 
-# top 10 po “relevance_score” (ako nema polja, tretiraj kao 0)
-items_sorted = sorted(items, key=lambda x: (x.get("relevance_score",0), x.get("published_date") or ""), reverse=True)[:10]
+# bazna lista za Top: sort po (score, date)
+sorted_all = sorted(items, key=lambda x: (x.get("relevance_score",0), x.get("published_date") or ""), reverse=True)
+
+# (opcionalno) minimalni score prag
+if MIN_SCORE > 0:
+    sorted_all = [it for it in sorted_all if (it.get("relevance_score",0) >= MIN_SCORE)]
+
+# (opcionalno) anti-dominance
+sorted_all = apply_anti_dominance(sorted_all)
+
+# uzmi Top 10
+top10 = sorted_all[:10]
 
 outdir = ROOT / "06-delivery" / "briefs" / "industry"
 outdir.mkdir(parents=True, exist_ok=True)
@@ -82,7 +133,7 @@ with open(fname, "w", encoding="utf-8-sig") as f:
         top_tags=cnt_tags.most_common(8),
         top_vendors=cnt_v.most_common(8),
         top_ops=cnt_o.most_common(8),
-        top_items=items_sorted,
+        top_items=top10,
         total=len(items)
     ))
 print("Wrote:", fname)
