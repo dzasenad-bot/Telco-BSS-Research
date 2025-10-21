@@ -1,0 +1,64 @@
+name: postpublish
+on:
+  workflow_run:
+    workflows: ["weekly"]
+    types: [completed]
+
+jobs:
+  post:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TZ: Europe/Sarajevo
+      N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+      N8N_HMAC_SECRET: ${{ secrets.N8N_HMAC_SECRET }} # opcionalno; ako nije postavljen, slat će se bez potpisa
+    steps:
+      - name: Build payload
+        run: |
+          cat > payload.json <<'JSON'
+          {
+            "repo": "${{ github.event.workflow_run.repository.full_name }}",
+            "branch": "${{ github.event.workflow_run.head_branch }}",
+            "head_sha": "${{ github.event.workflow_run.head_sha }}",
+            "run_id": "${{ github.event.workflow_run.id }}",
+            "run_number": "${{ github.event.workflow_run.run_number }}",
+            "run_attempt": "${{ github.event.workflow_run.run_attempt }}",
+            "run_url": "${{ github.event.workflow_run.html_url }}",
+            "artifacts_url": "${{ github.event.workflow_run.artifacts_url }}",
+            "created_at": "${{ github.event.workflow_run.created_at }}",
+            "name": "${{ github.event.workflow_run.name }}"
+          }
+          JSON
+          echo "Payload built:"
+          cat payload.json
+
+      - name: Call n8n (with optional HMAC)
+        run: |
+          set -euo pipefail
+
+          # Pripremi osnovne headere
+          HDRS=(-H "Content-Type: application/json"
+                -H "X-GH-Workflow: postpublish"
+                -H "X-GH-Repo: ${{ github.repository }}"
+                -H "X-GH-Run-URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}")
+
+          # Ako je definisan HMAC secret, izračunaj potpis i dodaj header
+          if [ -n "${N8N_HMAC_SECRET:-}" ]; then
+            SIG=$(openssl dgst -sha256 -hmac "$N8N_HMAC_SECRET" -binary payload.json | xxd -p -c 256)
+            HDRS+=(-H "X-Signature: sha256=${SIG}")
+            echo "HMAC signature added."
+          else
+            echo "N8N_HMAC_SECRET nije postavljen — šaljem bez potpisa."
+          fi
+
+          # Slanje uz retry i timeoute
+          curl -sS \
+            --fail-with-body \
+            --retry 3 \
+            --retry-delay 2 \
+            --max-time 20 \
+            -A "github-actions-postpublish" \
+            -X POST "$N8N_WEBHOOK_URL" \
+            "${HDRS[@]}" \
+            --data @payload.json
