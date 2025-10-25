@@ -1,3 +1,7 @@
+concurrency:
+  group: weekly-commit
+  cancel-in-progress: false
+
 name: weekly
 on:
   schedule: [{ cron: "0 17 * * 0" }]  # Nedjelja 17:00 UTC (18:00 CET / 19:00 CEST, Europe/Sarajevo)
@@ -14,8 +18,12 @@ jobs:
       PANORAMA_ANTI_DOM: "1"
       PANORAMA_MAX_PER_DOMAIN: "3"
       PANORAMA_MIN_SCORE: "2"
+      PYTHONUNBUFFERED: "1"
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
 
       - uses: actions/setup-python@v5
         with:
@@ -33,7 +41,6 @@ jobs:
           python -m pip install -U pip
           pip install -r requirements.txt
 
-      # Brzi uvid u strukturu i naziv fajlova prije synth koraka
       - name: Debug tree
         run: |
           pwd
@@ -41,28 +48,41 @@ jobs:
           ls -la 04-pipelines/python/synth || true
           git ls-files | grep -i -E "market_panorama|competitor|weekly|synth" || true
 
-      - run: python 04-pipelines/python/etl/ingest_rss.py
-      - run: python 04-pipelines/python/classify/quick_classify.py
-      - run: python 04-pipelines/python/synth/make_market_panorama_weekly.py
+      - name: Run ingest_rss
+        run: python -X dev -u 04-pipelines/python/etl/ingest_rss.py
 
-      # Uslovno pokretanje competitor skripte (ne ruši build ako fajl ne postoji)
+      - name: Run quick_classify
+        run: python -X dev -u 04-pipelines/python/classify/quick_classify.py
+
+      - name: Run make_market_panorama_weekly
+        run: python -X dev -u 04-pipelines/python/synth/make_market_panorama_weekly.py
+
       - name: Run competitor weekly (if exists)
         run: |
           if [ -f "04-pipelines/python/synth/make_competitor_weekly.py" ]; then
             echo "Found make_competitor_weekly.py → running..."
-            python 04-pipelines/python/synth/make_competitor_weekly.py
+            python -X dev -u 04-pipelines/python/synth/make_competitor_weekly.py
           else
             echo "⚠️  make_competitor_weekly.py not found at 04-pipelines/python/synth/ — skipping."
-            echo "    Check the Debug tree output above for the actual file name/path."
           fi
 
       - name: Commit briefs
+        env:
+          BRANCH: ${{ github.ref_name }}   # npr. "main"
         run: |
-          git config user.name "github-actions[bot]"
+          set -euxo pipefail
+          git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add 06-delivery/briefs
-          git commit -m "chore: weekly briefs $(date -Iminutes)" || echo "No changes"
-          git push
+          git fetch origin "$BRANCH"
+          git checkout "$BRANCH"
+          git pull --rebase origin "$BRANCH"
+          git add 06-delivery/briefs || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: weekly briefs $(date -Iminutes)"
+            git push origin HEAD:"$BRANCH"
+          else
+            echo "No changes to commit."
+          fi
 
       - name: Upload weekly artifacts
         uses: actions/upload-artifact@v4
