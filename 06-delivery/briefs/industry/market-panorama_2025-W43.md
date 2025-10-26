@@ -1,12 +1,12 @@
 ﻿# Market Panorama — BSS (Weekly 2025-W43)
-**Period:** last 7 days (2025-10-15 → 2025-10-21).  
+**Period:** last 7 days (2025-10-20 → 2025-10-26).  
 **Scope:** Charging, Billing/RA, CRM/CX, Catalog/Order, Partner/Policy; + SaaS/ODA/AI.
 
 ## 1) Top trendovi
 
-- **general** — 26
+- **general** — 51
 
-- **ai_bss** — 8
+- **ai_bss** — 16
 
 - **catalog** — 2
 
@@ -19,22 +19,25 @@
 
 ## 4) Top 10 naslova (sa “why it matters”)
 
-- **[How Wi-Fi 8 tackles the growing device explosion](https://www.rcrwireless.com/20251021/devices/wi-fi-8-device-explosion)** — _RCR Wireless_ (2025-10-21)  
+- **[Which will lead AI growth wave, AT&T, T-Mobile US, or Verizon? (Analyst Angle)](https://www.rcrwireless.com/20251024/analyst-angle/ai-carriers)** — _RCR Wireless_ (2025-10-24)  
   Why it matters: AI u BSS – automatizacija/personalizacija.
 
-- **[China Mobile’s revenues slightly up y-o-y in Jan-Sep](https://www.rcrwireless.com/20251021/5g/china-mobile-2)** — _RCR Wireless_ (2025-10-21)  
-  Why it matters: Širi BSS/industrijski signal.
-
-- **[‘Biggest in the US’ – equity recap fuels Future Tech’s private 5G ambitions](https://www.rcrwireless.com/20251021/internet-of-things/future-tech-private-5g-recap)** — _RCR Wireless_ (2025-10-21)  
+- **[Agentic AI: Why telcos will be the architects of industry transformation (Reader Forum)](https://www.rcrwireless.com/20251024/reader-forum/agentic-ai-industry)** — _RCR Wireless_ (2025-10-24)  
   Why it matters: AI u BSS – automatizacija/personalizacija.
 
-- **[NTT Data keeps on (semi-autonomously) truckin'](https://www.fierce-network.com/wireless/ntt-data-keeps-semi-autonomous-truckin)** — _Fierce Wireless_ (2025-10-21)  
+- **[MasOrange achieves merger synergies of $301m in Jan-Sep](https://www.rcrwireless.com/20251024/5g/masorange-synergies)** — _RCR Wireless_ (2025-10-24)  
   Why it matters: Širi BSS/industrijski signal.
 
-- **[Ciena’s optic tech will power new Caribbean subsea cable](https://www.fierce-network.com/broadband/cienas-optic-tech-will-power-new-caribbean-subsea-cable)** — _Fierce Wireless_ (2025-10-21)  
+- **[Investment firm to take 80% stake in Meta's Hyperion data center](https://www.fierce-network.com/newswire/investment-firm-take-80-stake-metas-hyperion-data-center)** — _Fierce Wireless_ (2025-10-24)  
   Why it matters: Širi BSS/industrijski signal.
 
-- **[Opinion: Verizon needs new CEO Dan Schulman to pull it out of the doldrums](https://www.fierce-network.com/wireless/opinion-verizon-needs-new-ceo-dan-schulman-pull-it-out-doldrums)** — _Fierce Wireless_ (2025-10-21)  
+- **[AT&T snaps back at T-Mobile with new ad](https://www.fierce-network.com/wireless/att-snaps-back-t-mobile-new-ad)** — _Fierce Wireless_ (2025-10-24)  
+  Why it matters: Širi BSS/industrijski signal.
+
+- **[Celona's private network deal with EchoStar's Hughes will open new opportunities](https://www.fierce-network.com/wireless/celonas-private-network-deal-echostars-hughes-will-open-new-opportunities)** — _Fierce Wireless_ (2025-10-24)  
+  Why it matters: Širi BSS/industrijski signal.
+
+- **[SureCall Webinar: Redefining Enterprise DAS: Solving In-Building Challenges with Hybrid Fiber](https://content.rcrwireless.com/redefining-enterprise-das-webinar)** — _RCR Wireless_ (2025-10-23)  
   Why it matters: Širi BSS/industrijski signal.
 
 - **[GSMA Webinar: The Programmable Network: API-Driven Value for the Entire Ecosystem](https://content.rcrwireless.com/webinar-the-programmable-network)** — _RCR Wireless_ (2025-10-20)  
@@ -42,4 +45,4 @@
 
 
 ---
-*Generated from 35 unique items across 7 days.*
+*Generated from 68 unique items across 7 days.*
