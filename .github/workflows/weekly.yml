@@ -12,8 +12,7 @@ permissions:
 
 jobs:
   run:
-    # ⚠️ Ovo osigurava da weekly trči SAMO na main
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'  # trči samo na main
     runs-on: ubuntu-latest
     env:
       TZ: Europe/Sarajevo
@@ -31,7 +30,7 @@ jobs:
       - name: Announce workflow
         run: echo "::notice title=Workflow::WEEKLY via ${{ github.event_name }} on ${{ github.ref_name }}"
 
-      # RANI REBASE: na čistom stablu → nema exit 128
+      # RANI REBASE na čistom stablu
       - name: Sync branch (early rebase on clean tree)
         run: |
           set -euxo pipefail
@@ -104,7 +103,7 @@ jobs:
 
           git commit -m "chore(ci): weekly briefs $(date -Iminutes) [skip ci]"
 
-          # Push sa do 3 pokušaja (utrka s paralelnim pushom)
+          # Push s retry (utrka s paralelnim pushom)
           for i in 1 2 3; do
             if git push origin HEAD:main; then
               echo "✅ Pushed on attempt $i"
