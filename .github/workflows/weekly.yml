@@ -66,28 +66,52 @@ jobs:
             echo "⚠️  make_competitor_weekly.py not found at 04-pipelines/python/synth/ — skipping."
           fi
 
-      - name: Commit briefs
+      - name: Commit & push briefs (rebase + retry)
         env:
-          BRANCH: ${{ github.ref_name }}   # npr. "main"
+          BRANCH: ${{ github.ref_name }}   # obično "main"
         run: |
           set -euxo pipefail
+
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Uvijek radimo na tačnoj grani i povučemo najnovije stanje
           git fetch origin "$BRANCH"
           git checkout "$BRANCH"
-          git pull --rebase origin "$BRANCH"
-          git add 06-delivery/briefs || true
-          if ! git diff --cached --quiet; then
-            git commit -m "chore: weekly briefs $(date -Iminutes)"
-            git push origin HEAD:"$BRANCH"
-          else
-            echo "No changes to commit."
+
+          # 1) Pokušaj rebase na remote
+          if ! git rebase origin/"$BRANCH"; then
+            echo "⚠️  Rebase conflict – prelazim na soft reset prema origin/$BRANCH"
+            git rebase --abort || true
+            # Poravnaj index na stanje remote grane, lokalne izmjene ostaju staged nakon add-a
+            git reset --soft origin/"$BRANCH"
           fi
 
-      - name: Upload weekly artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: weekly_bundle
-          if-no-files-found: warn
-          path: |
-            06-delivery/briefs/**
+          # 2) Stage-aj samo generirane briefove
+          git add 06-delivery/briefs || true
+
+          # Ako nema promjena, izlazimo bez greške
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: weekly briefs $(date -Iminutes)"
+
+          # 3) Push sa do 3 pokušaja (u slučaju da je neko pogurao između)
+          for i in 1 2 3; do
+            if git push origin HEAD:"$BRANCH"; then
+              echo "✅ Pushed on attempt $i"
+              exit 0
+            fi
+            echo "🔁 Push failed (attempt $i). Refetch + rebase, pa novi pokušaj…"
+            git fetch origin "$BRANCH"
+            if ! git rebase origin/"$BRANCH"; then
+              git rebase --abort || true
+              git reset --soft origin/"$BRANCH"
+            fi
+          done
+
+          echo "❌ Push failed after retries."
+          exit 1
+
