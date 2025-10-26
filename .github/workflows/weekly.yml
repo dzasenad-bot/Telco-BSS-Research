@@ -66,7 +66,7 @@ jobs:
             echo "⚠️  make_competitor_weekly.py not found at 04-pipelines/python/synth/ — skipping."
           fi
 
-      - name: Commit & push briefs (rebase + retry)
+            - name: Commit & push briefs (stash + rebase + retry)
         env:
           BRANCH: ${{ github.ref_name }}   # obično "main"
         run: |
@@ -75,22 +75,23 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Uvijek radimo na tačnoj grani i povučemo najnovije stanje
+          # 0) Uvijek radimo na tačnoj grani i povučemo najnovije stanje
           git fetch origin "$BRANCH"
           git checkout "$BRANCH"
 
-          # 1) Pokušaj rebase na remote
-          if ! git rebase origin/"$BRANCH"; then
-            echo "⚠️  Rebase conflict – prelazim na soft reset prema origin/$BRANCH"
-            git rebase --abort || true
-            # Poravnaj index na stanje remote grane, lokalne izmjene ostaju staged nakon add-a
-            git reset --soft origin/"$BRANCH"
-          fi
+          # 1) Stash-aj lokalne izmjene (generirani output) prije rebase-a
+          git stash push -u -m "ci-briefs-pre-rebase" -- 06-delivery/briefs || true
 
-          # 2) Stage-aj samo generirane briefove
+          # 2) Poravnaj se na najnoviji remote (čisto radno stablo -> rebase prolazi)
+          git pull --rebase origin "$BRANCH" || { git rebase --abort || true; }
+
+          # 3) Vrati naš stash (ako postoji)
+          git stash pop || true
+
+          # 4) Stage-aj samo generirane briefove
           git add 06-delivery/briefs || true
 
-          # Ako nema promjena, izlazimo bez greške
+          # Ako nema promjena, završavamo bez greške
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
@@ -98,7 +99,7 @@ jobs:
 
           git commit -m "chore: weekly briefs $(date -Iminutes)"
 
-          # 3) Push sa do 3 pokušaja (u slučaju da je neko pogurao između)
+          # 5) Push sa do 3 pokušaja (ako je neko pogurao između)
           for i in 1 2 3; do
             if git push origin HEAD:"$BRANCH"; then
               echo "✅ Pushed on attempt $i"
@@ -108,10 +109,16 @@ jobs:
             git fetch origin "$BRANCH"
             if ! git rebase origin/"$BRANCH"; then
               git rebase --abort || true
+              # Poravnaj index na remote snapshot pa ponovno stage-aj i (re)commit-aj
               git reset --soft origin/"$BRANCH"
+              git add 06-delivery/briefs || true
+              if git diff --cached --quiet; then
+                echo "No changes left to push after reset."
+                exit 0
+              fi
+              git commit --amend --no-edit || git commit -m "chore: weekly briefs $(date -Iminutes)"
             fi
           done
 
           echo "❌ Push failed after retries."
           exit 1
-
