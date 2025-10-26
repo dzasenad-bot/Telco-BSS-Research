@@ -19,6 +19,7 @@ jobs:
       PANORAMA_MAX_PER_DOMAIN: "3"
       PANORAMA_MIN_SCORE: "2"
       PYTHONUNBUFFERED: "1"
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -75,34 +76,31 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 0) Uvijek radimo na tačnoj grani i povučemo najnovije stanje
+          # 0) Radimo na tačnoj grani i povučemo najnovije stanje
           git fetch origin "$BRANCH"
           git checkout "$BRANCH"
 
-          # 1) Stash-aj sve generisane izlaze koje znamo da mijenjamo
-          #    (interim podaci + svi briefs sadržaji). -u uključuje i untracked.
-          git stash push -u -m "ci-briefs-pre-rebase" -- \
-            03-data/interim \
-            06-delivery/briefs || true
+          # 1) Stash prije rebase-a (samo naš izlazni dir)
+          git stash push -u -m "ci-briefs-pre-rebase" -- 06-delivery/briefs || true
 
-          # 2) Poravnaj se na najnoviji remote
+          # 2) Rebase na najnoviji remote
           git pull --rebase origin "$BRANCH" || { git rebase --abort || true; }
 
-          # 3) Vrati stash (ako postoji); ako dođe do trivijalnih konflikata, nastavi
+          # 3) Vrati stash (ako postoji)
           git stash pop || true
 
-          # 4) Stage-aj samo generisane foldere koje želimo komitovati
-          git add 03-data/interim 06-delivery/briefs || true
+          # 4) Stage-aj samo generirane briefove
+          git add 06-delivery/briefs || true
 
-          # Ako nema promjena, izađi bez greške
+          # 5) Ako nema promjena, gotovo
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "chore(ci): weekly briefs $(date -Iminutes) [skip ci]"
+          git commit -m "chore: weekly briefs $(date -Iminutes)"
 
-          # 5) Push sa do 3 pokušaja (ako je neko pogurao između)
+          # 6) Push uz do 3 pokušaja
           for i in 1 2 3; do
             if git push origin HEAD:"$BRANCH"; then
               echo "✅ Pushed on attempt $i"
@@ -110,22 +108,25 @@ jobs:
             fi
             echo "🔁 Push failed (attempt $i). Refetch + rebase, pa novi pokušaj…"
             git fetch origin "$BRANCH"
-
             if ! git rebase origin/"$BRANCH"; then
               git rebase --abort || true
-              # Poravnaj HEAD na remote bez gubitka staged izmjena
               git reset --soft origin/"$BRANCH"
-              git add 03-data/interim 06-delivery/briefs || true
-
+              git add 06-delivery/briefs || true
               if git diff --cached --quiet; then
                 echo "No changes left to push after reset."
                 exit 0
               fi
-
-              # Ako postoji prethodni commit, amend-aj; u suprotnom napravi novi
-              git commit --amend --no-edit || git commit -m "chore(ci): weekly briefs $(date -Iminutes) [skip ci]"
+              git commit --amend --no-edit || git commit -m "chore: weekly briefs $(date -Iminutes)"
             fi
           done
 
           echo "❌ Push failed after retries."
           exit 1
+
+      - name: Upload weekly artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly_bundle
+          if-no-files-found: warn
+          path: |
+            06-delivery/briefs/**
