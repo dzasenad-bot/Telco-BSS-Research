@@ -66,7 +66,7 @@ jobs:
             echo "⚠️  make_competitor_weekly.py not found at 04-pipelines/python/synth/ — skipping."
           fi
 
-            - name: Commit & push briefs (stash + rebase + retry)
+      - name: Commit & push briefs (stash + rebase + retry)
         env:
           BRANCH: ${{ github.ref_name }}   # obično "main"
         run: |
@@ -79,25 +79,28 @@ jobs:
           git fetch origin "$BRANCH"
           git checkout "$BRANCH"
 
-          # 1) Stash-aj lokalne izmjene (generirani output) prije rebase-a
-          git stash push -u -m "ci-briefs-pre-rebase" -- 06-delivery/briefs || true
+          # 1) Stash-aj sve generisane izlaze koje znamo da mijenjamo
+          #    (interim podaci + svi briefs sadržaji). -u uključuje i untracked.
+          git stash push -u -m "ci-briefs-pre-rebase" -- \
+            03-data/interim \
+            06-delivery/briefs || true
 
-          # 2) Poravnaj se na najnoviji remote (čisto radno stablo -> rebase prolazi)
+          # 2) Poravnaj se na najnoviji remote
           git pull --rebase origin "$BRANCH" || { git rebase --abort || true; }
 
-          # 3) Vrati naš stash (ako postoji)
+          # 3) Vrati stash (ako postoji); ako dođe do trivijalnih konflikata, nastavi
           git stash pop || true
 
-          # 4) Stage-aj samo generirane briefove
-          git add 06-delivery/briefs || true
+          # 4) Stage-aj samo generisane foldere koje želimo komitovati
+          git add 03-data/interim 06-delivery/briefs || true
 
-          # Ako nema promjena, završavamo bez greške
+          # Ako nema promjena, izađi bez greške
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "chore: weekly briefs $(date -Iminutes)"
+          git commit -m "chore(ci): weekly briefs $(date -Iminutes) [skip ci]"
 
           # 5) Push sa do 3 pokušaja (ako je neko pogurao između)
           for i in 1 2 3; do
@@ -107,16 +110,20 @@ jobs:
             fi
             echo "🔁 Push failed (attempt $i). Refetch + rebase, pa novi pokušaj…"
             git fetch origin "$BRANCH"
+
             if ! git rebase origin/"$BRANCH"; then
               git rebase --abort || true
-              # Poravnaj index na remote snapshot pa ponovno stage-aj i (re)commit-aj
+              # Poravnaj HEAD na remote bez gubitka staged izmjena
               git reset --soft origin/"$BRANCH"
-              git add 06-delivery/briefs || true
+              git add 03-data/interim 06-delivery/briefs || true
+
               if git diff --cached --quiet; then
                 echo "No changes left to push after reset."
                 exit 0
               fi
-              git commit --amend --no-edit || git commit -m "chore: weekly briefs $(date -Iminutes)"
+
+              # Ako postoji prethodni commit, amend-aj; u suprotnom napravi novi
+              git commit --amend --no-edit || git commit -m "chore(ci): weekly briefs $(date -Iminutes) [skip ci]"
             fi
           done
 
