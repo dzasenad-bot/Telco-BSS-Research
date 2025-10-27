@@ -1,7 +1,7 @@
 # Competitor Weekly — 2025-W44
 
-_Generated at: 2025-10-27T09:11:36Z UTC_
-_Build: e939083f745cda6a8d7ff94de8b115dfdecdc421_
+_Generated at: 2025-10-27T09:28:12Z UTC_
+_Build: e8850e87c55b05014cca36a51e5f92502754d6c5_
 
 > Nema pronađenog `05-data/competitors.csv` — preskačem tabelu konkurenta.
 
