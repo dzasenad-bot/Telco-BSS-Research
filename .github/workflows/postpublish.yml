@@ -12,7 +12,7 @@ jobs:
     env:
       TZ: Europe/Sarajevo
       N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
-      N8N_HMAC_SECRET: ${{ secrets.N8N_HMAC_SECRET }} # opcionalno
+      N8N_API_TOKEN: ${{ secrets.N8N_API_TOKEN }}   # <— NOVO
 
     steps:
       - name: Build payload
@@ -40,41 +40,15 @@ jobs:
           echo "Len(raw)=$(( ${#RAW} ))"
           printf '%s' "$RAW" | hexdump -C | head || true
 
-      - name: Call n8n (with optional HMAC)
+      - name: Call n8n (header token auth)
+        shell: bash
         run: |
           set -euo pipefail
 
-          # 0) Sanitizuj i validiraj URL iz secreta
           URL_CLEAN="$(printf '%s' "${N8N_WEBHOOK_URL:-}" | tr -d '\r' | sed 's/^[ \t]*//;s/[ \t]*$//')"
-          if [ -z "$URL_CLEAN" ]; then
-            echo "❌ N8N_WEBHOOK_URL je prazan (secret nije postavljen ili pogrešno ime)."
-            exit 1
-          fi
-          if ! echo "$URL_CLEAN" | grep -Eiq '^https?://'; then
-            echo "❌ N8N_WEBHOOK_URL nije valjan http/https URL: $URL_CLEAN"
-            exit 1
-          fi
+          test -n "$URL_CLEAN" || { echo "❌ N8N_WEBHOOK_URL empty"; exit 1; }
           echo "➡️  Using webhook: $(echo "$URL_CLEAN" | sed 's,^\(https\?://.\{5\}\).*,\1…(masked),')"
 
-          # 0.5) Brzi HEAD ping (debug) – ne obara job ako faila
-          curl -I -sS "$URL_CLEAN" | head -n 5 || echo "ℹ️  HEAD ping nije uspio (možda Webhook traži POST)."
-
-          # 1) Pripremi headere
-          HDRS=(-H "Content-Type: application/json"
-                -H "X-GH-Workflow: postpublish"
-                -H "X-GH-Repo: ${{ github.repository }}"
-                -H "X-GH-Run-URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}")
-
-          # 2) (Opcionalno) HMAC potpis
-          if [ -n "${N8N_HMAC_SECRET:-}" ]; then
-            SIG=$(openssl dgst -sha256 -hmac "$N8N_HMAC_SECRET" -binary payload.json | xxd -p -c 256)
-            HDRS+=(-H "X-Signature: sha256=${SIG}")
-            echo "🔐 HMAC signature added."
-          else
-            echo "ℹ️  N8N_HMAC_SECRET nije postavljen — šaljem bez potpisa."
-          fi
-
-          # 3) Slanje sa retry/timeout
           curl -sS \
             --fail-with-body \
             --retry 3 \
@@ -82,5 +56,9 @@ jobs:
             --max-time 20 \
             -A "github-actions-postpublish" \
             -X POST "$URL_CLEAN" \
-            "${HDRS[@]}" \
-            --data @payload.json
+            -H 'Content-Type: application/json' \
+            -H 'X-GH-Workflow: postpublish' \
+            -H 'X-GH-Repo: ${{ github.repository }}' \
+            -H 'X-GH-Run-URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}' \
+            -H "x-internal-token: ${N8N_API_TOKEN}" \
+            --data-binary @payload.json
