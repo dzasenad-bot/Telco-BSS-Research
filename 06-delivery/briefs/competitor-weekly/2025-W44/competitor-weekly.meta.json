@@ -1,7 +1,7 @@
 {
-  "generated_at": "2025-10-27T08:47:54Z",
+  "generated_at": "2025-10-27T08:57:10Z",
   "week": "2025-W44",
-  "git_sha": "06f1801455247bb047e24697c1a63dffa042ffbc",
+  "git_sha": "bb0f4fffd7d27553f2275a1cc6c1d6e0a16cad99",
   "inputs": {
     "competitors_csv": "05-data/competitors.csv",
     "json_candidates": [
