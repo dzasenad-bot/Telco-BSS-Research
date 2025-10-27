@@ -4,11 +4,13 @@
 
 ## 1) Top trendovi
 
-- **general** — 51
+- **general** — 49
 
-- **ai_bss** — 16
+- **ai_bss** — 18
 
 - **catalog** — 2
+
+- **saas_bss** — 1
 
 
 ## 2) Najspominjaniji vendori
