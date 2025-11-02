@@ -1,16 +1,12 @@
 ﻿# Market Panorama — BSS (Weekly 2025-W44)
-**Period:** last 7 days (2025-10-21 → 2025-10-27).  
+**Period:** last 7 days (2025-10-27 → 2025-11-02).  
 **Scope:** Charging, Billing/RA, CRM/CX, Catalog/Order, Partner/Policy; + SaaS/ODA/AI.
 
 ## 1) Top trendovi
 
-- **general** — 49
+- **general** — 23
 
-- **ai_bss** — 18
-
-- **catalog** — 2
-
-- **saas_bss** — 1
+- **ai_bss** — 12
 
 
 ## 2) Najspominjaniji vendori
@@ -21,30 +17,27 @@
 
 ## 4) Top 10 naslova (sa “why it matters”)
 
-- **[Which will lead AI growth wave, AT&T, T-Mobile US, or Verizon? (Analyst Angle)](https://www.rcrwireless.com/20251024/analyst-angle/ai-carriers)** — _RCR Wireless_ (2025-10-24)  
+- **[Part I: Why AI strategy is now an industrial race (Analyst Angle)](https://www.rcrwireless.com/20251031/ai-ml/ai-strategy-industrial-race)** — _RCR Wireless_ (2025-10-31)  
   Why it matters: AI u BSS – automatizacija/personalizacija.
 
-- **[Agentic AI: Why telcos will be the architects of industry transformation (Reader Forum)](https://www.rcrwireless.com/20251024/reader-forum/agentic-ai-industry)** — _RCR Wireless_ (2025-10-24)  
+- **[The AI inflection: Turning networks into intelligence (Reader Forum)](https://www.rcrwireless.com/20251031/reader-forum/the-ai-inflection)** — _RCR Wireless_ (2025-10-31)  
   Why it matters: AI u BSS – automatizacija/personalizacija.
 
-- **[MasOrange achieves merger synergies of $301m in Jan-Sep](https://www.rcrwireless.com/20251024/5g/masorange-synergies)** — _RCR Wireless_ (2025-10-24)  
+- **[SK Telecom ends Q2 with 17.3 million 5G subscribers](https://www.rcrwireless.com/20251031/5g/sk-telecom-5g-2)** — _RCR Wireless_ (2025-10-31)  
   Why it matters: Širi BSS/industrijski signal.
 
-- **[Investment firm to take 80% stake in Meta's Hyperion data center](https://www.fierce-network.com/newswire/investment-firm-take-80-stake-metas-hyperion-data-center)** — _Fierce Wireless_ (2025-10-24)  
+- **[Charter has high hopes about AI’s cost-cutting opportunities](https://www.fierce-network.com/broadband/charter-has-high-hopes-about-ais-cost-cutting-opportunities)** — _Fierce Wireless_ (2025-10-31)  
+  Why it matters: AI u BSS – automatizacija/personalizacija.
+
+- **[Lumen says neoclouds now fuel its enterprise growth](https://www.fierce-network.com/broadband/lumen-says-neoclouds-now-fuel-its-enterprise-growth)** — _Fierce Wireless_ (2025-10-31)  
   Why it matters: Širi BSS/industrijski signal.
 
-- **[AT&T snaps back at T-Mobile with new ad](https://www.fierce-network.com/wireless/att-snaps-back-t-mobile-new-ad)** — _Fierce Wireless_ (2025-10-24)  
+- **[AT&T to ad watchdog: See you in court](https://www.fierce-network.com/wireless/att-ad-watchdog-see-you-court)** — _Fierce Wireless_ (2025-10-31)  
   Why it matters: Širi BSS/industrijski signal.
 
-- **[Celona's private network deal with EchoStar's Hughes will open new opportunities](https://www.fierce-network.com/wireless/celonas-private-network-deal-echostars-hughes-will-open-new-opportunities)** — _Fierce Wireless_ (2025-10-24)  
-  Why it matters: Širi BSS/industrijski signal.
-
-- **[SureCall Webinar: Redefining Enterprise DAS: Solving In-Building Challenges with Hybrid Fiber](https://content.rcrwireless.com/redefining-enterprise-das-webinar)** — _RCR Wireless_ (2025-10-23)  
-  Why it matters: Širi BSS/industrijski signal.
-
-- **[GSMA Webinar: The Programmable Network: API-Driven Value for the Entire Ecosystem](https://content.rcrwireless.com/webinar-the-programmable-network)** — _RCR Wireless_ (2025-10-20)  
+- **[Market Pulse Report: Non-Terrestrial Networks Market Insights: Global Overview](https://content.rcrwireless.com/ntn-market-pulse-report-2025)** — _RCR Wireless_ (2025-10-30)  
   Why it matters: Širi BSS/industrijski signal.
 
 
 ---
-*Generated from 68 unique items across 7 days.*
+*Generated from 35 unique items across 7 days.*
