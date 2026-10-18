@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-10-18T19:13:16Z",
+  "week": "2026-W42",
+  "git_sha": "2a6dc2f8893039e08d020411a52f3a9f4a414d4d",
+  "inputs": {
+    "competitors_csv": "05-data/competitors.csv",
+    "json_candidates": [
+      "04-pipelines/python/classify/output/competitor_items.json",
+      "04-pipelines/output/competitor_items.json",
+      "05-data/competitor/*.json"
+    ]
+  },
+  "counts": {
+    "competitors": 0,
+    "highlights": 0
+  }
+}
